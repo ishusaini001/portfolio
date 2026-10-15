@@ -198,7 +198,7 @@ const P = [
     host: "AI Cloud Health · staging",
     tag: "Healthcare · SaaS · Management Platform",
     t: "AI Cloud Health — Clinic & Hospital Management Platform",
-    u: "",
+    u: "https://cloudhealth.grootsoftwares.com/",
     d: "An all-in-one platform for digital clinic and hospital management, connecting appointments, prescriptions and invoicing under one platform, with role-based dashboards for admins, doctors, nurses and front-desk staff.",
     tags: [
       "Healthcare SaaS",
