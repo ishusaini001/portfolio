@@ -182,10 +182,10 @@ function phoneView(id) {
   return `<div class="mv" style="--sbg:${m.sb}"><div class="dev"><div class="dev-bar"><i></i></div><div class="dev-vp" tabindex="0" role="region" aria-label="Scrollable mobile view: ${m.alt}"><img loading="lazy" decoding="async" src="${m.src}" alt="${m.alt}" width="349"></div></div><span class="mvh">Scroll inside the phone ↓</span></div>`;
 }
 /* small phone on each project card (top of the real mobile screenshot) */
-function phoneMini(id) {
+function phoneMini(id, i) {
   const m = MOB[id];
   return m
-    ? `<div class="pm" style="--sbg:${m.sb}" aria-hidden="true"><div class="pm-bar"><i></i></div><div class="pm-vp"><img loading="lazy" decoding="async" src="${m.src}" alt="" width="349"></div></div>`
+    ? `<div class="pm" data-i="${i}" data-m="1" style="--sbg:${m.sb}" title="Scroll the screen · click to open case study"><div class="pm-bar"><i></i></div><div class="pm-vp" tabindex="0" role="region" aria-label="Scrollable mobile screenshot: ${m.alt}"><img loading="lazy" decoding="async" src="${m.src}" alt="${m.alt}" width="349" draggable="false"></div></div>`
     : "";
 }
 
@@ -266,7 +266,7 @@ function mock(i, s, m) {
 
 /* project cards: browser preview + real mobile screenshot phone + bullets */
 $("#projects").innerHTML = P.map(
-  (p, i) => `<article class="proj rv" style="--acc:${p.c}"><button class="pv" data-i="${i}" aria-label="Open ${p.t} case study"><div class="br"><div class="bh"><i></i><i></i><i></i><em>${p.u ? p.u.replace("https://", "").replace(/\/$/, "") : p.host}</em></div><div class="scr">${mock(i, p.sc[0])}<span class="hint">Open case study</span></div></div>${phoneMini(p.id)}</button>
+  (p, i) => `<article class="proj rv" style="--acc:${p.c}"><div class="pvw"><button class="pv" data-i="${i}" aria-label="Open ${p.t} case study"><div class="br"><div class="bh"><i></i><i></i><i></i><em>${p.u ? p.u.replace("https://", "").replace(/\/$/, "") : p.host}</em></div><div class="scr">${mock(i, p.sc[0])}<span class="hint">Open case study</span></div></div></button>${phoneMini(p.id,i)}</div>
 <div><div class="tag">${p.tag}</div><h3>${p.t}</h3><p>${p.d}</p><ul class="kp">${(KEY[p.id] || []).map((k) => `<li>${k}</li>`).join("")}</ul><div class="tags">${p.tags.map((t) => `<span>${t}</span>`).join("")}</div><div class="row">${p.u ? `<a class="btn live" href="${p.u}" target="_blank" rel="noopener">View Live Project <span aria-hidden="true">→</span><span class="sr">(opens in a new tab)</span></a>` : `<span class="btn ghost" style="cursor:default"><span style="color:#d97706">●</span> In development · not publicly live</span>`}<button class="btn ghost" data-i="${i}">Case study</button></div></div></article>`,
 ).join("");
 document.querySelectorAll("#projects .rv").forEach((e) => io.observe(e));
@@ -295,7 +295,10 @@ function open_(i) {
 }
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-i]");
-  if (b) open_(+b.dataset.i);
+  if (b) {
+    open_(+b.dataset.i);
+    if (b.dataset.m) show(+b.dataset.i, "Mobile");
+  }
 });
 $("#cl").onclick = () => dlg.close();
 dlg.onclick = (e) => {
