@@ -2802,3 +2802,64 @@ dialog {
     min-width: 72px;
   }
 }
+
+/* ======================= UPDATE v3: mobile polish ======================= */
+@media (max-width: 640px) {
+  /* case-study popup: scrollable full-page screenshots get a tall viewer */
+  #dscr:has([tabindex]) {
+    aspect-ratio: auto;
+    height: min(62vh, 480px);
+    height: min(62dvh, 480px);
+  }
+  #dscr {
+    padding: 0;
+  }
+  dialog {
+    max-height: 94vh;
+    max-height: 94dvh;
+  }
+  .mb {
+    padding: 18px 14px;
+  }
+  #dt {
+    font-size: 22px !important;
+  }
+  .x {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: var(--surface);
+  }
+  /* project cards */
+  .pm {
+    width: 22%;
+    min-width: 66px;
+    right: 6px;
+    bottom: -14px;
+    border-width: 4px;
+    border-radius: 16px;
+  }
+  .proj {
+    padding: 16px;
+  }
+  .kp li {
+    font-size: 14.5px;
+  }
+  .tl {
+    border-radius: 0 16px 16px 0;
+  }
+  .xg > div {
+    padding: 18px;
+  }
+  .stats div:nth-child(1) b {
+    font-size: 28px;
+  }
+}
+@media (max-width: 380px) {
+  .tags span {
+    font-size: 12px;
+  }
+  .pm {
+    display: none;
+  }
+}
