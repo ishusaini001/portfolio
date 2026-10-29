@@ -1,11 +1,3 @@
-/* auto-load phone-mockup styles (no index.html change needed) */
-(() => {
-  const l = document.createElement("link");
-  l.rel = "stylesheet";
-  l.href = "mobile.css";
-  document.head.appendChild(l);
-})();
-
 (() => {
   const q = (x) => document.querySelector(x),
     qa = (x) => document.querySelectorAll(x);
