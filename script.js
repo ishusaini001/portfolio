@@ -185,7 +185,7 @@ function phoneView(id) {
 function phoneMini(id) {
   const m = MOB[id];
   return m
-    ? `<div class="pm" aria-hidden="true"><img loading="lazy" decoding="async" src="${m.src}" alt=""></div>`
+    ? `<div class="pm" style="--sbg:${m.sb}" aria-hidden="true"><div class="pm-bar"><i></i></div><div class="pm-vp"><img loading="lazy" decoding="async" src="${m.src}" alt="" width="349"></div></div>`
     : "";
 }
 
