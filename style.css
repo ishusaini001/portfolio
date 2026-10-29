@@ -2902,6 +2902,7 @@ dialog {
   background: var(--sbg, #fff);
   overscroll-behavior: contain;
   scrollbar-width: none;
+  touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
 }
 .dev-vp::-webkit-scrollbar { display: none; }
@@ -2924,33 +2925,48 @@ dialog {
   pointer-events: none;
 }
 
-/* ---- small phone on project cards (real screenshot, top part) ---- */
+/* ---- small phone on project cards: full screenshot scrolls INSIDE the phone screen ---- */
 .pm {
   width: 25%;
   min-width: 96px;
   aspect-ratio: 349 / 760;
   padding: 0;
+  display: flex;
+  flex-direction: column;
   border-radius: 24px;
   border: 5px solid #0d0929;
-  background: #fff;
+  background: #0d0929;
+  overflow: hidden;
 }
-.pm:before {
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
+.pm:before { content: none; }
+.pm-bar {
+  flex: none;
+  height: 14px;
+  background: var(--sbg, #fff);
+  display: grid;
+  place-items: center;
+}
+.pm-bar i {
   width: 32%;
   height: 5px;
-  margin: 0;
-  z-index: 2;
+  border-radius: 9px;
   background: #0d0929;
 }
-.pm img {
+.pm-vp {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--sbg, #fff);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.pm-vp::-webkit-scrollbar { display: none; }
+.pm-vp img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  height: auto;
+  max-width: none;
 }
 @media (max-width: 640px) {
   .pm { width: 24%; min-width: 70px; border-width: 4px; border-radius: 17px; }
