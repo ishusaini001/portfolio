@@ -138,7 +138,7 @@ const P = [
     tag: "Healthcare · SaaS · Management Platform",
     t: "AI Cloud Health — Clinic & Hospital Management Platform",
     // u: "https://cloudhealth.grootsoftwares.com/",
-        u: "http://97.74.92.197:3001/",
+    u: "http://97.74.92.197:3001/",
     d: "An all-in-one platform for digital clinic and hospital management, connecting appointments, prescriptions and invoicing under one platform, with role-based dashboards for admins, doctors, nurses and front-desk staff.",
     tags: ["Healthcare SaaS", "Dashboard UI", "Landing page", "Content hierarchy"],
     sc: ["Landing Page", "Product Dashboard"],
@@ -267,7 +267,7 @@ function mock(i, s, m) {
 
 /* project cards: browser preview + real mobile screenshot phone + bullets */
 $("#projects").innerHTML = P.map(
-  (p, i) => `<article class="proj rv" style="--acc:${p.c}"><div class="pvw"><button class="pv" data-i="${i}" aria-label="Open ${p.t} case study"><div class="br"><div class="bh"><i></i><i></i><i></i><em>${p.u ? p.u.replace("https://", "").replace(/\/$/, "") : p.host}</em></div><div class="scr">${mock(i, p.sc[0])}<span class="hint">Open case study</span></div></div></button>${phoneMini(p.id,i)}</div>
+  (p, i) => `<article class="proj rv" style="--acc:${p.c}"><div class="pvw"><button class="pv" data-i="${i}" aria-label="Open ${p.t} case study"><div class="br"><div class="bh"><i></i><i></i><i></i><em>${p.u ? p.u.replace(/^https?:\/\//, "").replace(/\/$/, "") : p.host}</em></div><div class="scr">${mock(i, p.sc[0])}<span class="hint">Open case study</span></div></div></button>${phoneMini(p.id,i)}</div>
 <div><div class="tag">${p.tag}</div><h3>${p.t}</h3><p>${p.d}</p><ul class="kp">${(KEY[p.id] || []).map((k) => `<li>${k}</li>`).join("")}</ul><div class="tags">${p.tags.map((t) => `<span>${t}</span>`).join("")}</div><div class="row">${p.u ? `<a class="btn live" href="${p.u}" target="_blank" rel="noopener">View Live Project <span aria-hidden="true">→</span><span class="sr">(opens in a new tab)</span></a>` : `<span class="btn ghost" style="cursor:default"><span style="color:#d97706">●</span> In development · not publicly live</span>`}<button class="btn ghost" data-i="${i}">Case study</button></div></div></article>`,
 ).join("");
 document.querySelectorAll("#projects .rv").forEach((e) => io.observe(e));
@@ -284,7 +284,7 @@ function open_(i) {
   dlg.style.setProperty("--acc", p.c);
   $("#dtag").textContent = p.tag;
   $("#dt").textContent = p.t;
-  $("#durl").textContent = p.u ? p.u.replace("https://", "").replace(/\/$/, "") : p.host;
+  $("#durl").textContent = p.u ? p.u.replace(/^https?:\/\//, "").replace(/\/$/, "") : p.host;
   $("#dlive").style.display = p.u ? "" : "none";
   if (p.u) $("#dlive").href = p.u;
   $("#scrs").innerHTML = p.sc.map((s) => `<button aria-pressed="false">${s}</button>`).join("");
