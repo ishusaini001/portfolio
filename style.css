@@ -2981,3 +2981,17 @@ dialog {
   :root:not([data-theme="light"]) .pm,
   :root:not([data-theme="light"]) .dev { box-shadow: 0 30px 50px -22px rgba(0, 0, 0, 0.8); }
 }
+
+/* ======= card phone lives OUTSIDE the button so its screen scrolls in every browser ======= */
+.pvw { position: relative; min-width: 0; }
+.proj:nth-of-type(even) .pvw { order: 2; }
+@media (max-width: 900px) { .proj:nth-of-type(even) .pvw { order: 0; } }
+.pvw:hover .pm { transform: translateY(-8px); }
+.pm { cursor: pointer; }
+.pm-vp {
+  touch-action: pan-y;
+  overscroll-behavior: auto;
+  cursor: ns-resize;
+}
+.pm-vp img { -webkit-user-drag: none; user-select: none; }
+@media (hover: none) { .pvw:hover .pm { transform: none; } }
